@@ -3,6 +3,10 @@
 Lernapp für Mathematik nach dem Mastery-Prinzip. Ziel: von null bis zum Stoff der 3. Sek (Thurgau, Lehrplan 21).
 Dieser Prototyp enthält **einen Lernstrang: Grundlagen → Brüche → Terme → Gleichungen** (40 Themen).
 
+## Online testen
+
+https://alexanderweng-prog.github.io/Ich_lerne/ – wird bei jedem Push auf den Branch automatisch neu gebaut (`.github/workflows/pages.yml`).
+
 ## Starten
 
 ```bash
