@@ -1,0 +1,23 @@
+{
+  "name": "mastery-mathe",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Mastery-basierte Mathe-Lernapp (Prototyp: Strang Brüche – Terme – Gleichungen)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "preact": "^10.29.8"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
+    "typescript": "^7.0.2",
+    "vite": "^6.4.6",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.1.1"
+  }
+}
