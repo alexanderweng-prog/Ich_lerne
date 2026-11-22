@@ -34,7 +34,7 @@ const mixedM = (q: Q): string => {
 
 export const brueche: Skill[] = [
   {
-    id: 'B1', title: 'Was ist ein Bruch?', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G4'],
+    id: 'B1', title: 'Was ist ein Bruch?', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.1.g', prereqs: ['G4'],
     intro: 'Ein Ganzes wird in gleich grosse Teile geteilt. Der Nenner (unten) sagt, in wie viele Teile. Der Zähler (oben) sagt, wie viele Teile du nimmst.',
     tip: 'Nenner = Anzahl aller Teile. Zähler = Anzahl gefärbter Teile.',
     selfExplain: {
@@ -59,7 +59,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B2', title: 'Brüche erweitern', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B1', 'G2'],
+    id: 'B2', title: 'Brüche erweitern', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.3.f', prereqs: ['B1', 'G2'],
     intro: 'Erweitern heisst: Zähler und Nenner mit derselben Zahl multiplizieren. Der Wert des Bruchs bleibt gleich – die Teile werden nur feiner.',
     tip: 'Mit welcher Zahl wurde der Nenner multipliziert? Mit derselben Zahl multiplizierst du den Zähler.',
     selfExplain: {
@@ -84,7 +84,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B3', title: 'Brüche kürzen', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B2', 'G6'],
+    id: 'B3', title: 'Brüche kürzen', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.3.f', prereqs: ['B2', 'G6'],
     intro: 'Kürzen heisst: Zähler und Nenner durch dieselbe Zahl teilen. Vollständig gekürzt ist ein Bruch, wenn Zähler und Nenner keinen gemeinsamen Teiler mehr haben. Am schnellsten kürzt du mit dem ggT.',
     tip: 'Bestimme den ggT von Zähler und Nenner und teile beide dadurch.',
     gen: (r) => {
@@ -103,7 +103,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B4', title: 'Gemischte Zahlen', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B1', 'G4'],
+    id: 'B4', title: 'Gemischte Zahlen', area: 'Brüche', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.1.g', prereqs: ['B1', 'G4'],
     intro: 'Eine gemischte Zahl wie 2 1/3 bedeutet 2 + 1/3. Umwandeln in einen Bruch: Ganze mal Nenner, plus Zähler. Umgekehrt: Zähler durch Nenner teilen – das Ergebnis sind die Ganzen, der Rest ist der neue Zähler.',
     tip: '2 1/3: Ein Ganzes sind 3 Drittel, zwei Ganze sind 6 Drittel, dazu 1 Drittel.',
     gen: (r) => {
@@ -128,7 +128,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B5', title: 'Brüche vergleichen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B2', 'G7'],
+    id: 'B5', title: 'Brüche vergleichen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.2.g', prereqs: ['B2', 'G7'],
     intro: 'Brüche mit gleichem Nenner kannst du direkt am Zähler vergleichen. Haben sie verschiedene Nenner, machst du sie zuerst gleichnamig (gemeinsamer Nenner).',
     tip: 'Erweitere beide Brüche auf das kgV der Nenner.',
     gen: (r) => {
@@ -151,7 +151,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B6', title: 'Gleichnamige Brüche addieren und subtrahieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B3', 'B4'],
+    id: 'B6', title: 'Gleichnamige Brüche addieren und subtrahieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.f', prereqs: ['B3', 'B4'],
     intro: 'Haben Brüche denselben Nenner, addierst bzw. subtrahierst du nur die Zähler. Der Nenner bleibt gleich – er sagt ja nur, welche Art von Teilen du zählst. Am Schluss kürzen.',
     tip: '2 Fünftel + 1 Fünftel = 3 Fünftel – so wie 2 Äpfel + 1 Apfel = 3 Äpfel.',
     selfExplain: {
@@ -180,7 +180,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B7', title: 'Ungleichnamige Brüche addieren und subtrahieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B6', 'G7'],
+    id: 'B7', title: 'Ungleichnamige Brüche addieren und subtrahieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.i', prereqs: ['B6', 'G7'],
     intro: 'Brüche mit verschiedenen Nennern musst du zuerst gleichnamig machen: beide auf den Hauptnenner (kgV der Nenner) erweitern. Danach wie gleichnamige Brüche rechnen und kürzen.',
     tip: 'Hauptnenner = kgV der Nenner. Dann beide Brüche darauf erweitern.',
     selfExplain: {
@@ -218,7 +218,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B8', title: 'Brüche multiplizieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B3'],
+    id: 'B8', title: 'Brüche multiplizieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.g', prereqs: ['B3'],
     intro: 'Zähler mal Zähler, Nenner mal Nenner. Tipp: Vor dem Ausrechnen über Kreuz kürzen, dann bleiben die Zahlen klein. Einen gemeinsamen Nenner brauchst du hier nicht.',
     tip: 'Zähler · Zähler und Nenner · Nenner. Kürze vorher, wenn möglich.',
     selfExplain: {
@@ -244,7 +244,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B9', title: 'Bruchteile von Grössen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.C', prereqs: ['B8', 'G3'],
+    id: 'B9', title: 'Bruchteile von Grössen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.g', prereqs: ['B8', 'G3'],
     intro: '3/4 von 60 heisst 3/4 · 60. Rechne zuerst 60 : 4 (ein Viertel), dann mal 3 (drei Viertel).',
     tip: 'Erst durch den Nenner teilen, dann mal den Zähler.',
     gen: (r) => {
@@ -266,7 +266,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B10', title: 'Brüche dividieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B8'],
+    id: 'B10', title: 'Brüche dividieren', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.i', prereqs: ['B8'],
     intro: 'Durch einen Bruch teilen heisst: mit seinem Kehrwert multiplizieren. Kehrwert = Zähler und Nenner vertauschen. Also: a/b : c/d = a/b · d/c.',
     tip: 'Den ZWEITEN Bruch umdrehen, dann multiplizieren.',
     selfExplain: {
@@ -296,7 +296,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B11', title: 'Brüche und Dezimalzahlen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B3', 'G4'],
+    id: 'B11', title: 'Brüche und Dezimalzahlen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.g', prereqs: ['B3', 'D1'],
     intro: 'Ein Bruch mit Nenner 10, 100, 1000 lässt sich direkt als Dezimalzahl schreiben: 35/100 = 0.35. Andere Brüche erweiterst du zuerst auf einen solchen Nenner (oder rechnest Zähler : Nenner).',
     tip: 'Erweitere auf 10, 100 oder 1000.',
     gen: (r) => {
@@ -323,7 +323,7 @@ export const brueche: Skill[] = [
     },
   },
   {
-    id: 'B12', title: 'Rechnen mit negativen Brüchen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['B7', 'B10', 'G9'],
+    id: 'B12', title: 'Rechnen mit negativen Brüchen', area: 'Brüche', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.i', prereqs: ['B7', 'B10', 'G9'],
     intro: 'Für negative Brüche gelten dieselben Vorzeichenregeln wie für ganze Zahlen. Rechne mit den Beträgen und bestimme das Vorzeichen separat.',
     tip: 'Vorzeichen zuerst klären, dann wie gewohnt rechnen.',
     gen: (r) => {

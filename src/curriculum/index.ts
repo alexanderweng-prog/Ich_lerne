@@ -3,8 +3,19 @@ import { grundlagen } from './grundlagen';
 import { brueche } from './brueche';
 import { terme } from './terme';
 import { gleichungen } from './gleichungen';
+import { gleichungenErweitert } from './gleichungen2';
+import { zahlen } from './zahlen';
+import { dezimal } from './dezimal';
+import { potenzen } from './potenzen';
+import { prozent } from './prozent';
+import { groessen } from './groessen';
+import { geometrie } from './geometrie';
+import { funktionen, daten } from './funktionen';
 
-export const SKILLS: Skill[] = [...grundlagen, ...brueche, ...terme, ...gleichungen];
+export const SKILLS: Skill[] = [
+  ...zahlen, ...grundlagen, ...dezimal, ...brueche, ...potenzen, ...terme, ...gleichungen, ...gleichungenErweitert,
+  ...prozent, ...groessen, ...geometrie, ...funktionen, ...daten,
+];
 export const BY_ID: Record<string, Skill> = Object.fromEntries(SKILLS.map((s) => [s.id, s]));
 
 /** Direkte Nachfolger (umgekehrte Voraussetzungs-Kanten). */

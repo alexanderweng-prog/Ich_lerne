@@ -54,7 +54,7 @@ function textTask(r: Rng): Task {
 
 export const gleichungen: Skill[] = [
   {
-    id: 'L1', title: 'Lösung einer Gleichung prüfen', area: 'Gleichungen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T1'],
+    id: 'L1', title: 'Lösung einer Gleichung prüfen', area: 'Gleichungen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.4.h', prereqs: ['T1'],
     intro: 'Eine Gleichung ist wie eine Waage im Gleichgewicht. Eine Zahl ist eine Lösung, wenn nach dem Einsetzen links und rechts dasselbe herauskommt.',
     tip: 'Setze die Zahl links und rechts ein und vergleiche.',
     gen: (r) => {
@@ -70,7 +70,7 @@ export const gleichungen: Skill[] = [
     },
   },
   {
-    id: 'L2', title: 'Gleichungen: x + a = b', area: 'Gleichungen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['L1', 'G8'],
+    id: 'L2', title: 'Gleichungen: x + a = b', area: 'Gleichungen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.4.h', prereqs: ['L1', 'G8'],
     intro: 'Waage-Prinzip: Was du auf einer Seite machst, musst du auch auf der anderen Seite machen. Um x allein zu haben, machst du die Rechnung rückgängig: aus «+ 5» wird «− 5» auf beiden Seiten.',
     tip: 'Umkehroperation: + wird zu −, − wird zu +. Immer auf beiden Seiten!',
     selfExplain: {
@@ -100,7 +100,7 @@ export const gleichungen: Skill[] = [
     },
   },
   {
-    id: 'L3', title: 'Gleichungen: a · x = b', area: 'Gleichungen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['L2', 'B3', 'G9'],
+    id: 'L3', title: 'Gleichungen: a · x = b', area: 'Gleichungen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.4.h', prereqs: ['L2', 'B3', 'G9'],
     intro: '3x heisst 3 · x. Die Umkehrung von «mal 3» ist «durch 3» – auf beiden Seiten. Bei x : 4 = 5 rechnest du umgekehrt «mal 4».',
     tip: 'Teile beide Seiten durch die Zahl vor dem x. Das Ergebnis darf ein Bruch sein.',
     gen: (r) => {
@@ -131,7 +131,7 @@ export const gleichungen: Skill[] = [
     },
   },
   {
-    id: 'L4', title: 'Gleichungen: a · x + b = c', area: 'Gleichungen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['L3'],
+    id: 'L4', title: 'Gleichungen: a · x + b = c', area: 'Gleichungen', stage: 'Sek 1', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['L3'],
     intro: 'Zwei Schritte, in umgekehrter Reihenfolge wie beim Ausrechnen: Zuerst die Zahl ohne x wegbringen (+/−), dann durch die Zahl vor dem x teilen.',
     tip: 'Erst + / −, dann · / :. Wie beim Ausziehen: zuerst die Jacke, dann den Pulli.',
     selfExplain: {
@@ -157,7 +157,7 @@ export const gleichungen: Skill[] = [
     },
   },
   {
-    id: 'L5', title: 'Variable auf beiden Seiten', area: 'Gleichungen', stage: 'Sek 2', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['L4', 'T2'],
+    id: 'L5', title: 'Variable auf beiden Seiten', area: 'Gleichungen', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['L4', 'T2'],
     intro: 'Bringe zuerst alle x auf eine Seite (z. B. auf beiden Seiten −2x), dann alle Zahlen auf die andere. Danach wie gewohnt teilen.',
     tip: 'Sortieren: x-Terme links, Zahlen rechts. Jede Umformung auf beiden Seiten.',
     gen: (r) => {
@@ -180,7 +180,7 @@ export const gleichungen: Skill[] = [
     },
   },
   {
-    id: 'L6', title: 'Gleichungen mit Klammern', area: 'Gleichungen', stage: 'Sek 2', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['L5', 'T5'],
+    id: 'L6', title: 'Gleichungen mit Klammern', area: 'Gleichungen', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['L5', 'T5'],
     intro: 'Löse zuerst alle Klammern auf (ausmultiplizieren, Minus vor der Klammer beachten), fasse zusammen und löse dann wie gewohnt.',
     tip: 'Schritt 1: Klammern weg. Schritt 2: zusammenfassen. Schritt 3: x isolieren.',
     gen: (r) => {
@@ -211,7 +211,7 @@ export const gleichungen: Skill[] = [
     },
   },
   {
-    id: 'L7', title: 'Gleichungen mit Brüchen', area: 'Gleichungen', stage: 'Sek 2', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['L6', 'B7'],
+    id: 'L7', title: 'Gleichungen mit Brüchen', area: 'Gleichungen', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['L6', 'B7'],
     intro: 'Multipliziere die ganze Gleichung mit dem Hauptnenner – JEDEN Term auf beiden Seiten. Dann verschwinden die Brüche und du löst wie gewohnt.',
     tip: 'Mit dem Hauptnenner multiplizieren – auch die Terme ohne Bruch!',
     gen: (r) => {
@@ -244,13 +244,13 @@ export const gleichungen: Skill[] = [
     },
   },
   {
-    id: 'L8', title: 'Textaufgaben mit Gleichungen', area: 'Gleichungen', stage: 'Sek 2', niveau: 'alle', lp21: 'MA.1.C', prereqs: ['L5'],
+    id: 'L8', title: 'Textaufgaben mit Gleichungen', area: 'Gleichungen', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['L5'],
     intro: '1. Was ist gesucht? Das wird x. 2. Alle anderen Grössen mit x ausdrücken. 3. Gleichung aufstellen. 4. Lösen. 5. Kontrolle im Text: Passt die Antwort?',
     tip: 'Schreibe zuerst auf: «x = …». Dann übersetze jeden Satz in einen Term.',
     gen: textTask,
   },
   {
-    id: 'L9', title: 'Formeln umstellen', area: 'Gleichungen', stage: 'Sek 3', niveau: 'erweitert', lp21: 'MA.1.A', prereqs: ['L4', 'B10'],
+    id: 'L9', title: 'Formeln umstellen', area: 'Gleichungen', stage: 'Sek 3', niveau: 'erweitert', lp21: 'MA.3.C.3.g', prereqs: ['L4', 'B10'],
     intro: 'Formeln umstellen funktioniert wie Gleichungen lösen – nur sind die «Zahlen» Buchstaben. Die gesuchte Grösse wird isoliert, alle anderen Grössen behandelst du wie Zahlen.',
     tip: 'Tu so, als wären alle anderen Buchstaben Zahlen. Welche Umkehroperationen brauchst du?',
     gen: (r) => {

@@ -3,7 +3,14 @@ import type { AnswerSpec, Misconception } from '../math/check';
 /** Ein Rechenschritt im Lösungsweg. `m` ist Mathe-Notation (wird gesetzt), `why` die Begründung. */
 export interface Step { m: string; why?: string }
 
-export interface Visual { type: 'bar'; parts: number; shaded: number }
+export type Shape = 'rect' | 'rtriangle' | 'triangle' | 'parallelogram' | 'trapez' | 'circle' | 'cuboid' | 'cylinder' | 'prism' | 'pyramid' | 'cone' | 'sphere';
+
+export type Visual =
+  | { type: 'bar'; parts: number; shaded: number }
+  /** Koordinatensystem von −r bis r mit Punkten und/oder Geraden y = m·x + q */
+  | { type: 'coords'; r?: number; points?: Array<{ label: string; x: number; y: number }>; lines?: Array<{ m: number; q: number }> }
+  /** Skizze (nicht massstäblich) mit Beschriftungen, z. B. { a: '5 cm' } */
+  | { type: 'figure'; shape: Shape; labels: Partial<Record<string, string>> };
 
 export interface Task {
   /** Text; Mathe steht zwischen $…$ */
@@ -17,7 +24,9 @@ export interface Task {
   inputHint?: string;
 }
 
-export type Area = 'Grundlagen' | 'Brüche' | 'Terme' | 'Gleichungen';
+export type Area =
+  | 'Zahlen' | 'Grundlagen' | 'Dezimalzahlen' | 'Brüche' | 'Potenzen' | 'Terme' | 'Gleichungen'
+  | 'Prozent' | 'Grössen' | 'Geometrie' | 'Funktionen' | 'Daten';
 
 export interface SelfExplain {
   q: string;
@@ -31,10 +40,10 @@ export interface Skill {
   title: string;
   area: Area;
   /** Typische Schulstufe (vorläufig, an Lehrmittel anpassen). */
-  stage: 'Primar' | 'Sek 1' | 'Sek 2' | 'Sek 3';
+  stage: 'Zyklus 1' | 'Primar' | 'Sek 1' | 'Sek 2' | 'Sek 3';
   /** 'alle' = Grundanspruch; 'erweitert' = v. a. höheres Niveau (vorläufig). */
   niveau: 'alle' | 'erweitert';
-  /** Grobe Zuordnung zum Lehrplan 21 (Feinzuordnung noch offen). */
+  /** Lehrplan 21 (Thurgau): Kompetenz und Kompetenzstufe, z. B. 'MA.1.A.3.i' */
   lp21: string;
   prereqs: string[];
   /** Kurze Erklärung (2–4 Sätze). */

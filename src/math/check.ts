@@ -8,10 +8,16 @@ import {
 } from './expr';
 
 export type NumberForm = 'any' | 'reduced' | 'improper' | 'mixed' | 'decimal' | 'integer';
-export type ExprForm = 'any' | 'expanded' | 'simplified' | 'factored' | 'monomial';
+export type ExprForm = 'any' | 'expanded' | 'simplified' | 'factored' | 'monomial' | 'primefactors';
 
 export type AnswerSpec =
-  | { kind: 'number'; value: Q; form?: NumberForm }
+  | { kind: 'number'; value: Q; form?: NumberForm; unit?: string }
+  /** Gerundete Ergebnisse (z. B. mit π): richtig, wenn |Eingabe − Wert| ≤ tol */
+  | { kind: 'approx'; value: number; tol: number; dec: number; unit?: string }
+  /** Punkt im Koordinatensystem, Eingabe z. B. (3|−2) */
+  | { kind: 'point'; x: Q; y: Q }
+  /** Mehrere Lösungen, z. B. x = 2 oder x = −2 */
+  | { kind: 'solutions'; variable: string; values: Q[] }
   | { kind: 'expr'; value: string; form?: ExprForm }
   | { kind: 'solution'; variable: string; value: Q }
   | { kind: 'formula'; variable: string; value: string }
@@ -116,6 +122,8 @@ function exprFormIssue(node: Node, target: Poly, form: ExprForm): string | null 
       if (!walk(node) || nums > 1 || new Set(names).size !== names.length) return msg;
       return null;
     }
+    case 'primefactors':
+      return primeProduct(node) ? null : 'Der Wert stimmt, aber es müssen alles Primzahlen sein (z. B. 2³ · 3 · 5).';
     case 'factored': {
       if (!isProductWithSum(node)) return 'Der Wert stimmt, aber der Term soll als Produkt geschrieben werden (ausklammern).';
       // Der Inhalt der Klammer darf keinen gemeinsamen Faktor mehr haben.
@@ -165,6 +173,40 @@ function stripLhs(input: string, variable: string): string | null {
   return null;
 }
 
+/** Einheit oder Prozentzeichen am Ende (und «Fr.» am Anfang) entfernen: «12.5 cm» → «12.5». */
+export function stripUnit(s: string): string {
+  return s.trim()
+    .replace(/^(fr\.?|chf)\s*/i, '')
+    .replace(/(\s*(%|‰|°|[a-zA-ZäöüÄÖÜ][a-zA-ZäöüÄÖÜ.²³/]*))+\s*$/, '')
+    .trim();
+}
+
+function isPrime(n: bigint): boolean {
+  if (n < 2n) return false;
+  for (let i = 2n; i * i <= n; i++) if (n % i === 0n) return false;
+  return true;
+}
+
+/** Ist der Ausdruck ein Produkt aus Primzahlen bzw. Primzahlpotenzen? */
+function primeProduct(n: Node): boolean {
+  if (n.t === 'par') return primeProduct(n.e);
+  if (n.t === 'num') return n.v.isInt() && isPrime(n.v.n);
+  if (n.t === 'bin' && n.op === '*') return primeProduct(n.l) && primeProduct(n.r);
+  if (n.t === 'bin' && n.op === '^') return n.l.t === 'num' && n.l.v.isInt() && isPrime(n.l.v.n) && n.r.t === 'num';
+  return false;
+}
+
+function readPoint(raw: string): [Q, Q] | null {
+  const s = raw.replace(/[−–]/g, '-').trim();
+  const xy = /x\s*=\s*([^,;|y]+)[,;|\s]+y\s*=\s*(.+)$/i.exec(s);
+  if (xy) return [readNumber(xy[1]), readNumber(xy[2])];
+  const inner = s.replace(/^[A-Za-z]?\s*\(/, '').replace(/\)\s*$/, '');
+  let parts = inner.split(/[|;]/);
+  if (parts.length !== 2) parts = inner.split(/,\s+/);
+  if (parts.length !== 2) return null;
+  return [readNumber(parts[0]), readNumber(parts[1])];
+}
+
 export function check(spec: AnswerSpec, input: string, mis: Misconception[] = []): CheckResult {
   const raw = input.trim();
   if (spec.kind === 'choice') {
@@ -176,12 +218,35 @@ export function check(spec: AnswerSpec, input: string, mis: Misconception[] = []
   try {
     switch (spec.kind) {
       case 'number': {
-        const v = readNumber(raw);
+        const v = readNumber(stripUnit(raw) || raw);
         if (v.eq(spec.value)) {
-          const issue = numberFormIssue(raw, v, spec.form ?? 'any');
+          const issue = numberFormIssue(stripUnit(raw) || raw, v, spec.form ?? 'any');
           return issue ? { correct: false, formOnly: true, msg: issue } : { correct: true };
         }
         return wrong(mis, (m) => typeof m === 'string' ? false : v.eq(m));
+      }
+      case 'approx': {
+        const v = readNumber(stripUnit(raw) || raw).toNumber();
+        if (Math.abs(v - spec.value) <= spec.tol + 1e-9) return { correct: true };
+        return wrong(mis, (m) => typeof m !== 'string' && Math.abs(v - m.toNumber()) <= spec.tol + 1e-9);
+      }
+      case 'point': {
+        const pt = readPoint(raw);
+        if (!pt) return { correct: false, invalid: true, msg: 'Schreibe den Punkt als (x|y), z. B. (3|−2).' };
+        if (pt[0].eq(spec.x) && pt[1].eq(spec.y)) return { correct: true };
+        if (pt[0].eq(spec.y) && pt[1].eq(spec.x) && !spec.x.eq(spec.y)) return { correct: false, misconception: true, msg: 'Du hast x und y vertauscht. Zuerst kommt die x-Koordinate (nach rechts), dann die y-Koordinate (nach oben).' };
+        return { correct: false };
+      }
+      case 'solutions': {
+        const cleaned = raw.replace(/[LＬ]\s*=/g, '').replace(new RegExp(`${spec.variable}\\s*[₁₂12]?\\s*=`, 'g'), '').replace(/[{}]/g, '');
+        const parts = cleaned.split(/\s+oder\s+|\s+und\s+|;|\||,\s+/).map((x) => x.trim()).filter(Boolean);
+        if (!parts.length) return { correct: false, invalid: true, msg: 'Gib alle Lösungen an, z. B. x = 2 oder x = −3.' };
+        const vals = parts.map((x) => readNumber(x));
+        const uniq = vals.filter((v, i) => vals.findIndex((w) => w.eq(v)) === i);
+        const allRight = uniq.every((v) => spec.values.some((w) => w.eq(v)));
+        if (allRight && uniq.length === spec.values.length) return { correct: true };
+        if (allRight) return { correct: false, misconception: true, msg: `Richtig, aber nicht vollständig: Es gibt ${spec.values.length} Lösungen.` };
+        return { correct: false };
       }
       case 'solution': {
         const rhs = stripLhs(raw, spec.variable);

@@ -9,7 +9,7 @@
 // Nachfolgende Themen werden ab «learned» freigeschaltet. «mastered» verlangt zusätzlich
 // eine erfolgreiche Wiederholung an einem späteren Tag (Bloom/Guskey: Mastery muss stabil sein).
 
-import { SKILLS, BY_ID, ancestorsWithDepth } from '../curriculum';
+import { SKILLS, BY_ID, ancestors, ancestorsWithDepth } from '../curriculum';
 
 export type Status = 'new' | 'learning' | 'learned' | 'mastered';
 export type Phase = 'example' | 'faded' | 'practice';
@@ -67,7 +67,20 @@ export function newProfile(name: string, klasse: string): Profile {
 
 /** Fehlende Themen ergänzen (wenn neue Inhalte dazukommen). */
 export function migrate(p: Profile): Profile {
-  for (const s of SKILLS) if (!p.skills[s.id]) p.skills[s.id] = freshSkill();
+  let added = false;
+  for (const s of SKILLS) if (!p.skills[s.id]) { p.skills[s.id] = freshSkill(); added = true; }
+  if (added) {
+    // Neue Grundlagen-Themen, die unter bereits gelernten Themen liegen, gelten als gekonnt
+    // (sie werden in den nächsten Tagen kurz überprüft).
+    const now = Date.now();
+    for (const s of SKILLS) {
+      if (!isDone(p.skills[s.id])) continue;
+      for (const a of ancestors(s.id)) {
+        const st = p.skills[a];
+        if (st.status === 'new') Object.assign(st, { status: 'learned', placed: true, stability: 2, due: now + DAY });
+      }
+    }
+  }
   return p;
 }
 

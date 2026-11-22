@@ -4,7 +4,7 @@ import { lin, p } from './fmt';
 
 export const terme: Skill[] = [
   {
-    id: 'T1', title: 'Zahlen in Terme einsetzen', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G9', 'G10'],
+    id: 'T1', title: 'Zahlen in Terme einsetzen', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.4.h', prereqs: ['G9', 'G10'],
     intro: 'Eine Variable ist ein Platzhalter für eine Zahl. Beim Einsetzen ersetzt du die Variable durch die Zahl – negative Zahlen immer in Klammern. 3x heisst 3 · x.',
     tip: 'Setze die Zahl mit Klammern ein: x = −4 → 3 · (−4).',
     selfExplain: {
@@ -45,7 +45,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T2', title: 'Gleichartige Terme zusammenfassen', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T1'],
+    id: 'T2', title: 'Gleichartige Terme zusammenfassen', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.4.i', prereqs: ['T1'],
     intro: 'Nur gleichartige Terme lassen sich zusammenfassen: 3a + 5a = 8a (wie 3 Äpfel + 5 Äpfel). 3a + 5b bleibt so – Äpfel und Birnen. Auch x und x² sind verschieden.',
     tip: 'Ordne zuerst: alle a zusammen, alle b zusammen. Achte auf das Vorzeichen VOR jedem Term.',
     selfExplain: {
@@ -72,7 +72,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T3', title: 'Produkte vereinfachen', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T2'],
+    id: 'T3', title: 'Produkte vereinfachen', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.4.i', prereqs: ['T2'],
     intro: 'Bei einem Produkt multiplizierst du die Zahlen miteinander und schreibst die Variablen dahinter. Gleiche Variablen werden zur Potenz: x · x = x².',
     tip: 'Zahlen zu Zahlen, Variablen zu Variablen: 3x · 4y = 3 · 4 · x · y.',
     gen: (r) => {
@@ -95,7 +95,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T4', title: 'Minus vor der Klammer', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T2', 'G8'],
+    id: 'T4', title: 'Minus vor der Klammer', area: 'Terme', stage: 'Sek 1', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['T2', 'G8'],
     intro: 'Steht ein Plus vor der Klammer, kannst du sie einfach weglassen. Steht ein Minus davor, ändern sich beim Weglassen ALLE Vorzeichen in der Klammer.',
     tip: '−(a − b) = −a + b. Jeder Term in der Klammer wechselt das Vorzeichen.',
     selfExplain: {
@@ -119,7 +119,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T5', title: 'Ausmultiplizieren', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T3', 'T4'],
+    id: 'T5', title: 'Ausmultiplizieren', area: 'Terme', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.4.i', prereqs: ['T3', 'T4'],
     intro: 'Distributivgesetz: Der Faktor vor der Klammer wird mit JEDEM Term in der Klammer multipliziert: k(a + b) = ka + kb.',
     tip: 'Zeichne Bögen vom Faktor zu jedem Term in der Klammer.',
     selfExplain: {
@@ -145,7 +145,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T6', title: 'Ausklammern', area: 'Terme', stage: 'Sek 2', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T5', 'G6'],
+    id: 'T6', title: 'Ausklammern', area: 'Terme', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['T5', 'G6'],
     intro: 'Ausklammern ist die Umkehrung des Ausmultiplizierens. Suche den grössten Faktor, der in allen Termen steckt (Zahl und Variable), und schreibe ihn vor die Klammer.',
     tip: 'ggT der Zahlen bestimmen; kommt eine Variable in allen Termen vor, gehört sie auch nach vorne. Kontrolle: wieder ausmultiplizieren.',
     gen: (r) => {
@@ -169,7 +169,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T7', title: 'Klammer mal Klammer', area: 'Terme', stage: 'Sek 2', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T5'],
+    id: 'T7', title: 'Klammer mal Klammer', area: 'Terme', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.4.j', prereqs: ['T5'],
     intro: 'Bei (a + b)(c + d) wird jeder Term der ersten Klammer mit jedem Term der zweiten multipliziert: ac + ad + bc + bd. Danach zusammenfassen.',
     tip: 'Vier Produkte bilden, dann gleichartige Terme zusammenfassen.',
     gen: (r) => {
@@ -190,7 +190,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T8', title: 'Binomische Formeln', area: 'Terme', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A', prereqs: ['T7'],
+    id: 'T8', title: 'Binomische Formeln', area: 'Terme', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.4.l', prereqs: ['T7'],
     intro: '1. (a + b)² = a² + 2ab + b²   2. (a − b)² = a² − 2ab + b²   3. (a + b)(a − b) = a² − b². Sie sind Abkürzungen für «Klammer mal Klammer».',
     tip: 'Das Quadrat einer Summe hat DREI Terme – das Mischglied 2ab nicht vergessen.',
     selfExplain: {
@@ -227,7 +227,7 @@ export const terme: Skill[] = [
     },
   },
   {
-    id: 'T9', title: 'Terme mit Brüchen', area: 'Terme', stage: 'Sek 2', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['T5', 'B12'],
+    id: 'T9', title: 'Terme mit Brüchen', area: 'Terme', stage: 'Sek 2', niveau: 'erweitert', lp21: 'MA.1.A.3.i', prereqs: ['T5', 'B12'],
     intro: 'Brüche als Koeffizienten behandelst du genau wie ganze Zahlen: 1/2 x + 1/3 x = (1/2 + 1/3) x = 5/6 x.',
     tip: 'Rechne die Koeffizienten wie normale Brüche (Hauptnenner).',
     gen: (r) => {

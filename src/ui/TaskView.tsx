@@ -1,7 +1,18 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
-import type { Skill, Task, Step, Visual } from '../curriculum/types';
+import type { Skill, Task, Step } from '../curriculum/types';
+import { VisualView } from './Visuals';
 import { check, type CheckResult } from '../math/check';
-import { solutionText } from '../engine/canonical';
+import { solutionText, canonicalInput } from '../engine/canonical';
+import type { AnswerSpec } from '../math/check';
+
+/** Musterlösung anzeigen: Mathe gesetzt, Einheit als Text. */
+export function SolutionView({ a }: { a: AnswerSpec }) {
+  if (a.kind === 'choice') return <>{solutionText(a)}</>;
+  if (a.kind === 'point' || a.kind === 'solutions') return <span class="math">{canonicalInput(a).replace(/-/g, '−')}</span>;
+  const unit = (a.kind === 'number' || a.kind === 'approx') && a.unit ? ` ${a.unit}` : '';
+  const txt = a.kind === 'number' && a.unit === 'Fr.' && !a.value.isInt() ? a.value.toNumber().toFixed(2) : canonicalInput(a);
+  return <><MathExpr src={txt} />{unit}</>;
+}
 import { MathExpr, Rich } from './MathView';
 
 export interface TaskResult { ok: boolean; assisted: boolean; confident?: boolean; misMsg?: string }
@@ -18,17 +29,6 @@ interface Props {
   onDone: (r: TaskResult) => void;
 }
 
-export function BarVisual({ v }: { v: Visual }) {
-  const w = 320, h = 56, pad = 2;
-  const pw = (w - 2 * pad) / v.parts;
-  return (
-    <svg class="bar" viewBox={`0 0 ${w} ${h}`} role="img" aria-label={`Streifen mit ${v.parts} Teilen, ${v.shaded} gefärbt`}>
-      {Array.from({ length: v.parts }, (_, i) => (
-        <rect key={i} x={pad + i * pw} y={pad} width={pw} height={h - 2 * pad} class={i < v.shaded ? 'on' : 'off'} />
-      ))}
-    </svg>
-  );
-}
 
 export function StepsView({ steps, count }: { steps: Step[]; count?: number }) {
   const shown = steps.slice(0, count ?? steps.length);
@@ -45,6 +45,14 @@ export function StepsView({ steps, count }: { steps: Step[]; count?: number }) {
 }
 
 const KEYS: Array<[string, string]> = [['x', 'x'], ['²', '²'], ['(', '('], [')', ')'], ['/', 'Bruch /'], ['·', '·'], [':', ':'], ['−', '−'], ['=', '=']];
+
+function keysFor(task: Task): Array<[string, string]> {
+  const a = task.answer;
+  if (a.kind === 'point') return [['(', '('], ['|', '|'], [')', ')'], ['−', '−'], ['/', 'Bruch /']];
+  if (a.kind === 'solutions') return [['x = ', 'x ='], [' oder ', 'oder'], ['−', '−'], ['/', 'Bruch /']];
+  if (a.kind === 'number' || a.kind === 'approx') return [['−', '−'], ['/', 'Bruch /'], ['.', 'Komma'], ['(', '('], [')', ')'], ['·', '·'], [':', ':'], ['^', 'hoch']];
+  return KEYS;
+}
 
 export function TaskView({ task, skill, givenSteps = 0, hints = true, askConfidence = false, placement = false, onDone }: Props) {
   const [input, setInput] = useState('');
@@ -87,7 +95,7 @@ export function TaskView({ task, skill, givenSteps = 0, hints = true, askConfide
   return (
     <div class="task">
       <p class="prompt"><Rich text={task.prompt} /></p>
-      {task.visual && <BarVisual v={task.visual} />}
+      {task.visual && <VisualView v={task.visual} />}
 
       {givenSteps > 0 && (
         <div class="given">
@@ -113,7 +121,7 @@ export function TaskView({ task, skill, givenSteps = 0, hints = true, askConfide
             onInput={(e) => { setInput((e.target as HTMLInputElement).value); setNote(null); }} />
           <div class="preview" aria-live="polite">{input.trim() && <>Vorschau: <MathExpr src={input} /></>}</div>
           <div class="keys">
-            {KEYS.map(([k, label]) => <button type="button" key={k} class="key" onClick={() => insert(k === '/' ? '/' : k)}>{label}</button>)}
+            {keysFor(task).map(([k, label]) => <button type="button" key={k} class="key" onClick={() => insert(k)}>{label}</button>)}
           </div>
           {askConfidence ? (
             <div class="row">
@@ -151,7 +159,7 @@ export function TaskView({ task, skill, givenSteps = 0, hints = true, askConfide
             <>
               <p class="fb-title">{result.confident ? 'Nicht ganz – obwohl du sicher warst. Schau dir den Weg genau an.' : 'Nicht ganz.'}</p>
               {result.msg && <p class="fb-mis">{result.msg}</p>}
-              <p>Richtig ist: <strong>{task.answer.kind === 'choice' ? solutionText(task.answer) : <MathExpr src={solutionText(task.answer)} />}</strong></p>
+              <p>Richtig ist: <strong><SolutionView a={task.answer} /></strong></p>
             </>
           )}
           <details open={!result.correct}>

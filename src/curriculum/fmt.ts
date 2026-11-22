@@ -42,3 +42,29 @@ export function lin(terms: Array<[number | Q, string]>): string {
 
 /** Vorzeichen-Schreibweise für einen Summanden: "+ 3" bzw. "- 3". */
 export const sgn = (n: number): string => (n < 0 ? `- ${-n}` : `+ ${n}`);
+
+/** Abbrechende Dezimalzahl exakt als Text ("12.05"), sonst Bruch. */
+export function dec(v: Q | number): string {
+  const q = typeof v === 'number' ? Q.fromDecimal(String(v)) : v;
+  let d = q.d, k = 0;
+  while (d % 10n === 0n) { d /= 10n; k++; }
+  let t = q.d, twos = 0, fives = 0;
+  while (t % 2n === 0n) { t /= 2n; twos++; }
+  while (t % 5n === 0n) { t /= 5n; fives++; }
+  if (t !== 1n) return q.toString();
+  const digits = Math.max(twos, fives);
+  const scaled = (q.n * 10n ** BigInt(digits)) / q.d;
+  const neg = scaled < 0n;
+  let s = (neg ? -scaled : scaled).toString().padStart(digits + 1, '0');
+  if (digits > 0) s = s.slice(0, -digits) + '.' + s.slice(-digits);
+  void k;
+  return (neg ? '-' : '') + s;
+}
+
+/** Zahl mit Tausender-Apostroph für Fliesstext: 12345 → "12'345" */
+export const big = (n: number): string => {
+  const neg = n < 0;
+  const [i, f] = Math.abs(n).toString().split('.');
+  const g = i.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+  return (neg ? '-' : '') + g + (f ? '.' + f : '');
+};

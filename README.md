@@ -1,7 +1,15 @@
 # Mastery Mathe – Prototyp
 
 Lernapp für Mathematik nach dem Mastery-Prinzip. Ziel: von null bis zum Stoff der 3. Sek (Thurgau, Lehrplan 21).
-Dieser Prototyp enthält **einen Lernstrang: Grundlagen → Brüche → Terme → Gleichungen** (40 Themen).
+
+**113 Themen in 12 Bereichen**, abgeleitet aus den Thurgauer Lehrplan-Plakaten Mathematik Zyklus 1–3:
+Zahlen (11), Grundlagen (10), Dezimalzahlen (8), Brüche (12), Potenzen (6), Terme (9), Gleichungen (11),
+Prozent & Proportionalität (10), Grössen (10), Geometrie (13), Funktionen (8), Daten & Zufall (5).
+Jedes Thema trägt Kompetenz und Kompetenzstufe (z. B. `MA.1.A.4.i`). Themen oberhalb der Markierung
+auf dem Zyklus-3-Plakat (vermutlich Grundanspruch) sind als «erweitert» gekennzeichnet.
+
+Nicht abgedeckt (für eine App mit automatischer Prüfung wenig geeignet): Konstruieren mit Zirkel/Geodreieck,
+Körper skizzieren, Kopfgeometrie, Erforschen/Argumentieren (MA.x.B), Diagramme selbst erstellen.
 
 ## Online testen
 

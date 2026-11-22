@@ -6,7 +6,7 @@ const N = (v: number) => Q.of(v);
 
 export const grundlagen: Skill[] = [
   {
-    id: 'G1', title: 'Plus und Minus', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: [],
+    id: 'G1', title: 'Plus und Minus', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.3.d', prereqs: ['Z4'],
     intro: 'Beim Addieren zählst du Mengen zusammen, beim Subtrahieren nimmst du weg. Bei grösseren Zahlen rechnest du stellenweise: Einer, Zehner, Hunderter.',
     tip: 'Zerlege eine Zahl: 47 + 38 = 47 + 30 + 8.',
     gen: (r) => {
@@ -30,7 +30,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G2', title: 'Einmaleins', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G1'],
+    id: 'G2', title: 'Einmaleins', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.3.d', prereqs: ['Z5'],
     intro: 'Multiplizieren heisst: gleiche Summanden zusammenfassen. 4 · 7 = 7 + 7 + 7 + 7. Das kleine Einmaleins solltest du auswendig und schnell können – alles Weitere baut darauf auf.',
     tip: 'Nutze Nachbaraufgaben: 7 · 8 = 7 · 7 + 7.',
     gen: (r) => {
@@ -43,7 +43,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G3', title: 'Mehrstellig multiplizieren', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G2'],
+    id: 'G3', title: 'Mehrstellig multiplizieren', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.3.e', prereqs: ['G2'],
     intro: 'Zerlege die grössere Zahl in Zehner und Einer und multipliziere beide Teile einzeln. Danach zählst du die Teilergebnisse zusammen.',
     tip: '23 · 7 = 20 · 7 + 3 · 7',
     gen: (r) => {
@@ -60,7 +60,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G4', title: 'Dividieren', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G2'],
+    id: 'G4', title: 'Dividieren', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.3.e', prereqs: ['G2'],
     intro: 'Dividieren ist die Umkehrung des Multiplizierens. 56 : 8 fragt: Wie oft passt 8 in 56? Oder: Welche Zahl mal 8 ergibt 56?',
     tip: 'Suche im Einmaleins: ? · 8 = 56.',
     gen: (r) => {
@@ -73,7 +73,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G5', title: 'Teilbarkeit', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.B', prereqs: ['G4'],
+    id: 'G5', title: 'Teilbarkeit', area: 'Grundlagen', stage: 'Primar', niveau: 'erweitert', lp21: 'MA.1.A.4.h', prereqs: ['G4'],
     intro: 'Eine Zahl ist durch eine andere teilbar, wenn die Division ohne Rest aufgeht. Regeln: durch 2 (letzte Ziffer gerade), durch 5 (endet auf 0 oder 5), durch 3 bzw. 9 (Quersumme durch 3 bzw. 9 teilbar), durch 10 (endet auf 0).',
     tip: 'Quersumme bilden: 1+2+6 = 9.',
     gen: (r) => {
@@ -99,7 +99,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G6', title: 'Grösster gemeinsamer Teiler (ggT)', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.B', prereqs: ['G5'],
+    id: 'G6', title: 'Grösster gemeinsamer Teiler (ggT)', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.i', prereqs: ['G5'],
     intro: 'Der ggT ist die grösste Zahl, die beide Zahlen ohne Rest teilt. Du brauchst ihn zum Kürzen von Brüchen.',
     tip: 'Schreibe die Teiler der kleineren Zahl auf und prüfe von gross nach klein.',
     gen: (r) => {
@@ -122,7 +122,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G7', title: 'Kleinstes gemeinsames Vielfaches (kgV)', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.B', prereqs: ['G5'],
+    id: 'G7', title: 'Kleinstes gemeinsames Vielfaches (kgV)', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.i', prereqs: ['G5'],
     intro: 'Das kgV ist die kleinste Zahl, die in beiden Einmaleins-Reihen vorkommt. Du brauchst es für den Hauptnenner beim Addieren von Brüchen.',
     tip: 'Gehe die Vielfachen der grösseren Zahl durch, bis eines durch die kleinere teilbar ist.',
     gen: (r) => {
@@ -146,7 +146,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G8', title: 'Negative Zahlen: Plus und Minus', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G1'],
+    id: 'G8', title: 'Negative Zahlen: Plus und Minus', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.i', prereqs: ['G1'],
     intro: 'Stell dir den Zahlenstrahl vor. Plus heisst nach rechts, Minus nach links. Eine negative Zahl subtrahieren ist dasselbe wie die positive Zahl addieren: 3 − (−5) = 3 + 5.',
     tip: 'Zwei Minus direkt hintereinander werden zu Plus: −(−5) = +5.',
     selfExplain: {
@@ -171,7 +171,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G9', title: 'Negative Zahlen: Mal und Durch', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G8', 'G4'],
+    id: 'G9', title: 'Negative Zahlen: Mal und Durch', area: 'Grundlagen', stage: 'Sek 1', niveau: 'alle', lp21: 'MA.1.A.3.i', prereqs: ['G8', 'G4'],
     intro: 'Rechne zuerst mit den Beträgen (ohne Vorzeichen). Dann das Vorzeichen: gleiche Vorzeichen ergeben Plus, verschiedene Vorzeichen ergeben Minus.',
     tip: 'Zähle die Minuszeichen: gerade Anzahl → Plus, ungerade → Minus.',
     gen: (r) => {
@@ -195,7 +195,7 @@ export const grundlagen: Skill[] = [
     },
   },
   {
-    id: 'G10', title: 'Rechenreihenfolge', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A', prereqs: ['G3', 'G4'],
+    id: 'G10', title: 'Rechenreihenfolge', area: 'Grundlagen', stage: 'Primar', niveau: 'alle', lp21: 'MA.1.A.4.h', prereqs: ['G3', 'G4'],
     intro: 'Reihenfolge: 1. Klammern, 2. Potenzen, 3. Punktrechnung (· und :), 4. Strichrechnung (+ und −). Gleichrangiges von links nach rechts.',
     tip: 'Markiere zuerst, was Punktrechnung ist.',
     selfExplain: {

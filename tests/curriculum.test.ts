@@ -46,7 +46,7 @@ describe.each(SKILLS.map((s) => [s.id, s.title]))('Generator %s (%s)', (id) => {
       const t = skill.gen(new Rng(seed));
       const parts = t.prompt.split('$').filter((_, i) => i % 2 === 1);
       for (const m of parts) for (const side of m.split('=')) {
-        if (/^\s*\d+\s*$/.test(side)) continue;
+        if (/^\s*\d+\s*$/.test(side) || /[☐√|]/.test(side)) continue;
         expect(() => parse(side), `Seed ${seed}: «${m}»`).not.toThrow();
       }
       expect(t.steps.length).toBeGreaterThan(0);

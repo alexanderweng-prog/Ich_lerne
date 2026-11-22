@@ -21,6 +21,7 @@ function tokenize(src: string): Tok[] {
     .replace(/[−–]/g, '-')
     .replace(/[·×⋅]/g, '*')
     .replace(/÷/g, ':')
+    .replace(/(\d)['’](?=\d)/g, '$1')
     .replace(/\s+/g, '');
   const out: Tok[] = [];
   let i = 0;

@@ -5,7 +5,7 @@ import { dueReviews, frontier, stats, streak, unlocked, isDone, type Status } fr
 import { useApp } from './ctx';
 
 const STATUS_LABEL: Record<Status, string> = { new: 'offen', learning: 'begonnen', learned: 'gelernt', mastered: 'gemeistert' };
-export const AREAS: Area[] = ['Grundlagen', 'Brüche', 'Terme', 'Gleichungen'];
+export const AREAS: Area[] = ['Zahlen', 'Grundlagen', 'Dezimalzahlen', 'Brüche', 'Potenzen', 'Terme', 'Gleichungen', 'Prozent', 'Grössen', 'Geometrie', 'Funktionen', 'Daten'];
 
 export function Home() {
   const { profile, go, update } = useApp();

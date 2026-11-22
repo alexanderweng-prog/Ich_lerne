@@ -3,9 +3,9 @@ import { BY_ID } from '../curriculum';
 import { Rng, type Task } from '../curriculum/types';
 import { recordPractice, recordMisconception, criterionProgress, demote, frontier } from '../engine/model';
 import { useApp } from './ctx';
-import { TaskView, StepsView, BarVisual } from './TaskView';
-import { MathExpr, Rich } from './MathView';
-import { solutionText } from '../engine/canonical';
+import { TaskView, StepsView, SolutionView } from './TaskView';
+import { VisualView } from './Visuals';
+import { Rich } from './MathView';
 
 const rng = new Rng();
 
@@ -163,9 +163,9 @@ function Example({ id, header }: { id: string; header: preact.ComponentChildren 
       <div class="example">
         <div class="label">Lösungsbeispiel</div>
         <p class="prompt"><Rich text={ex.prompt} /></p>
-        {ex.visual && <BarVisual v={ex.visual} />}
+        {ex.visual && <VisualView v={ex.visual} />}
         <StepsView steps={ex.steps} />
-        <p class="result">Ergebnis: <strong>{ex.answer.kind === 'choice' ? solutionText(ex.answer) : <MathExpr src={solutionText(ex.answer)} />}</strong></p>
+        <p class="result">Ergebnis: <strong><SolutionView a={ex.answer} /></strong></p>
       </div>
       {se && (
         <div class="selfexp">

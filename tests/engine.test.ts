@@ -31,7 +31,7 @@ describe('Einstufungstest', () => {
     while (pl.next()) pl.answer(false, false);
     const p = newProfile('Test', '1a');
     pl.apply(p);
-    expect(frontier(p)).toEqual(['G1']);
+    expect(frontier(p)).toEqual(['Z1']);
   });
 });
 
@@ -39,19 +39,19 @@ describe('Mastery-Modell', () => {
   it('Lernkriterium, dann verzögerte Prüfung', () => {
     const p = newProfile('A', '1a');
     const t0 = Date.now();
-    expect(recordPractice(p, 'G1', true, false, t0)).toBe(false);
-    expect(recordPractice(p, 'G1', false, false, t0)).toBe(false);
-    expect(recordPractice(p, 'G1', true, false, t0)).toBe(false);
-    expect(recordPractice(p, 'G1', true, true, t0)).toBe(false); // mit Hilfe zählt nicht
-    expect(recordPractice(p, 'G1', true, false, t0)).toBe(false);
-    expect(recordPractice(p, 'G1', true, false, t0)).toBe(true);
-    expect(p.skills.G1.status).toBe('learned');
-    expect(frontier(p)).toContain('G2');
+    expect(recordPractice(p, 'Z1', true, false, t0)).toBe(false);
+    expect(recordPractice(p, 'Z1', false, false, t0)).toBe(false);
+    expect(recordPractice(p, 'Z1', true, false, t0)).toBe(false);
+    expect(recordPractice(p, 'Z1', true, true, t0)).toBe(false); // mit Hilfe zählt nicht
+    expect(recordPractice(p, 'Z1', true, false, t0)).toBe(false);
+    expect(recordPractice(p, 'Z1', true, false, t0)).toBe(true);
+    expect(p.skills.Z1.status).toBe('learned');
+    expect(frontier(p)).toContain('Z2');
     expect(dueReviews(p, t0)).toEqual([]);
-    expect(dueReviews(p, t0 + DAY)).toEqual(['G1']);
-    recordReview(p, 'G1', true, true, t0 + DAY);
-    expect(p.skills.G1.status).toBe('mastered');
-    expect(p.skills.G1.due).toBeGreaterThan(t0 + 3 * DAY);
+    expect(dueReviews(p, t0 + DAY)).toEqual(['Z1']);
+    recordReview(p, 'Z1', true, true, t0 + DAY);
+    expect(p.skills.Z1.status).toBe('mastered');
+    expect(p.skills.Z1.due).toBeGreaterThan(t0 + 3 * DAY);
   });
   it('zwei Fehler in der Wiederholung → neu lernen', () => {
     const p = newProfile('B', '1a');
@@ -66,9 +66,9 @@ describe('Mastery-Modell', () => {
   it('implizite Wiederholung schiebt fällige Voraussetzungen', () => {
     const p = newProfile('C', '1a');
     const t0 = Date.now();
-    for (const id of ['G1', 'G2']) for (let i = 0; i < 4; i++) recordPractice(p, id, true, false, t0);
-    p.skills.G1.due = t0 + DAY; // fällig morgen
-    recordPractice(p, 'G3', true, false, t0 + DAY);
-    expect(p.skills.G1.due).toBeGreaterThan(t0 + DAY);
+    for (const id of ['Z1', 'Z2', 'Z3']) for (let i = 0; i < 4; i++) recordPractice(p, id, true, false, t0);
+    p.skills.Z1.due = t0 + DAY; // fällig morgen
+    recordPractice(p, 'Z4', true, false, t0 + DAY);
+    expect(p.skills.Z1.due).toBeGreaterThan(t0 + DAY);
   });
 });

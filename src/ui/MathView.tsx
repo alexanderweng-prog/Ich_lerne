@@ -71,7 +71,7 @@ export function MathExpr({ src }: { src: string }) {
       </span>
     );
   }
-  if (/[A-Za-z]{3,}|, |[{}…☐]/.test(src)) return <span class="math raw">{src.replace(/-/g, MINUS)}</span>;
+  if (/[A-Za-z]{3,}|, |[{}…☐√|→]|\d\s+[a-zA-Z]/.test(src)) return <span class="math raw">{src.replace(/-/g, MINUS)}</span>;
   const parts = src.split(/(=|<|>|≤|≥)/);
   try {
     const out: ComponentChildren[] = parts.map((part, i) => {

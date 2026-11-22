@@ -121,6 +121,18 @@ details summary { cursor: pointer; color: var(--brand); font-weight: 600; margin
 .meter > div { height: 100%; background: var(--ok); transition: width .3s; }
 .bar { width: 100%; max-width: 420px; display: block; margin: 8px 0 14px; }
 .bar rect { stroke: var(--ink); stroke-width: 1.5; }
+.coords { width: 100%; max-width: 320px; display: block; margin: 8px 0 14px; background: var(--card); }
+.coords .grid { stroke: var(--line); stroke-width: 1; }
+.coords .axis { stroke: var(--ink); stroke-width: 1.5; }
+.coords .fn { stroke: var(--brand); stroke-width: 2.5; }
+.coords .pt, .figure .pt { fill: var(--bad); }
+.coords .tick { font-size: 10px; fill: var(--muted); }
+.coords .lbl, .figure .lbl { font-size: 14px; fill: var(--ink); font-weight: 600; }
+.figure { width: 100%; max-width: 340px; display: block; margin: 8px 0 14px; }
+.figure .shape { fill: var(--brand-soft); stroke: var(--ink); stroke-width: 2; }
+.figure .shape.light { fill: var(--card); }
+.figure .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.figure .ra { fill: none; stroke: var(--ink); stroke-width: 1.5; }
 .bar rect.on { fill: var(--brand); }
 .bar rect.off { fill: var(--card); }
 
@@ -138,7 +150,7 @@ details summary { cursor: pointer; color: var(--brand); font-weight: 600; margin
 
 /* Karte */
 .legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.map { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.map { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
 .area h3 { margin-top: 0; font-size: .95rem; }
 .chip { display: block; width: 100%; text-align: left; font: inherit; font-size: .85rem; padding: 6px 8px; margin-bottom: 6px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); cursor: pointer; }
 .legend .chip { display: inline-block; width: auto; cursor: default; }
@@ -173,6 +185,5 @@ th, td { border-bottom: 1px solid var(--line); padding: 4px 6px; text-align: lef
   body { font-size: 16px; }
   .card { padding: 16px; }
   .stats { grid-template-columns: repeat(2, 1fr); }
-  .map { grid-template-columns: 1fr 1fr; }
   .prompt { font-size: 1.08rem; }
 }
